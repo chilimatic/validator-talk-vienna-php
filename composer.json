@@ -16,7 +16,7 @@
   "minimum-stability" : "dev",
   "autoload": {
     "psr-4": {
-      "minikanban\\app\\": "app/"
+      "app\\": "app/"
     }
   }
 }
