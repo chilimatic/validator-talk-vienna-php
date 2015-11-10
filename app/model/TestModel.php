@@ -1,6 +1,7 @@
 <?php
 namespace app\model;
 
+use chilimatic\lib\database\mongo\odm\AbstractModel;
 use chilimatic\lib\interfaces\ISelfValidator;
 use chilimatic\lib\traits\validator\PropertyValidatorGeneratorTrait;
 
@@ -11,9 +12,9 @@ use chilimatic\lib\traits\validator\PropertyValidatorGeneratorTrait;
  * Date: 11/9/15
  * Time: 4:12 PM
  *
- * File: TestModel.php
+ * @ODM\Configuration(db="test", collection="test")
  */
-class TestModel implements ISelfValidator
+class TestModel extends AbstractModel implements ISelfValidator
 {
 
     /**
@@ -22,6 +23,7 @@ class TestModel implements ISelfValidator
     use PropertyValidatorGeneratorTrait;
 
     /**
+     * @ODM\Property
      * @validator (name="type\scalar\isString", expect="true", operator="&", mandatory="false")
      *
      * @var string
@@ -29,6 +31,7 @@ class TestModel implements ISelfValidator
     private $id;
 
     /**
+     * @ODM\Property
      * @validator (name="type\scalar\isInt", expect="true", operator="&", mandatory="true")
      * @validator (name="type\scalar\number\isPositive", expect="true", operator="&")
      */
@@ -72,5 +75,16 @@ class TestModel implements ISelfValidator
         $this->count = $count;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'    => $this->id,
+            'count' => $this->count
+        ];
     }
 }

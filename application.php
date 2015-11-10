@@ -17,11 +17,24 @@ try {
         realpath('../app/config/serviceCollection.php')
     );
 
+    $dm = new \chilimatic\lib\database\mongo\odm\DocumentManager(
+        new MongoClient('mongodb://localhost:27017'),
+        new \chilimatic\lib\parser\annotation\AnnotationOdmParser()
+    );
+
     $test = new TestModel();
-    var_dump($test->validateProperties());
+    if ($test->validateProperties()) {
+        $dm->persist($test);
+    }
 
     $test->setCount(12);
-    var_dump($test->validateProperties());
+    if ($test->validateProperties()) {
+        $dm->persist($test);
+        var_dump($dm);
+        var_dump($test);
+    }
+
+
 
 } catch (\Exception $e) {
     echo $e->getMessage();
