@@ -23,7 +23,6 @@ try {
     $test->setCount(12);
     var_dump($test->validateProperties());
 
-
 } catch (\Exception $e) {
     echo $e->getMessage();
 }

@@ -30,7 +30,7 @@ class TestModel implements ISelfValidator
 
     /**
      * @validator (name="type\scalar\isInt", expect="true", operator="&", mandatory="true")
-     * @validator (name="type\scalar\isInt", expect="true", operator="&")
+     * @validator (name="type\scalar\number\isPositive", expect="true", operator="&")
      */
     private $count;
 
